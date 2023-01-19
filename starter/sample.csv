@@ -1,6 +1,7 @@
-size,name,price,flavor,frosting,sprinkles,filling
-regular,Stars and Stripes,2.99,Vanilla,Vanilla,"['Red', 'White', 'Blue', 'Chocolate']",Chocolate
-mini,Oreo,0.99,Chocolate,Cookies and Cream,['Oreo pieces'],
-large,Red Velvet,3.99,Red Velvet,Cream Cheese,[],
-regular,Triple Chocolate,2.99,Chocolate,Chocolate,[],Chocolate
-regular,Strawberry,2.99,Stawberry,Vanilla,[],
+size,name,flavor,icing,filling,price,filling,sprinkles
+mini, Pequeña magdalena de café, Coffee, Vanilla ,,5,,['coffee']
+behemoth, Basic B, Vanilla, Chocolate ,,12,,['Multicolored']
+regular, The Not So Basic B, Marble, Birthday Cake,,8,,"['House Mixture', 'hi', 'hello']"
+mini, Pequeña magdalena de café, Coffee, Vanilla ,,5,,['coffee']
+behemoth, Basic B, Vanilla, Chocolate ,,12,,['Multicolored']
+regular, The Not So Basic B, Marble, Birthday Cake,,8,,"['House Mixture', 'hi', 'hello']"
