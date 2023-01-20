@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import csv
 from pprint import pprint
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for, redirect
 
 
 
@@ -42,13 +42,13 @@ class Mini(Cupcake):
         self.icing = icing
         self.sprinkles = []
 
-mini_coffee_cupcake = Mini(" Pequeña magdalena de café", " Coffee", " Vanilla ", 5)
+mini_coffee_cupcake = Mini("Pequeña magdalena de café", " Coffee", " Vanilla ", 5)
 mini_coffee_cupcake.add_sprinkles("coffee")
-baker_dozen = Dozen(" Gluten Free", " Marble", " Vanilla", None, 8)
+baker_dozen = Dozen("Gluten Free", "Marble", "Vanilla", None, 8)
 baker_dozen.add_sprinkles('Chocolate', 'Strawberry')
 #  name, flavor, icing, filling, price
-behe = Behemoth(" Basic B", " Vanilla", " Chocolate ", None, 12)
-regular = Regular(" The Not So Basic B", " Marble", " Birthday Cake", " Strawberry ", 8)
+behe = Behemoth("Basic B", "Vanilla", " Chocolate ", None, 12)
+regular = Regular("The Not So Basic B", "Marble", "Birthday Cake", "Strawberry ", 8)
 regular.add_sprinkles("House Mixture", "hi", "hello")
 behe.add_sprinkles("Multicolored")
 
@@ -79,7 +79,7 @@ def write_csv(file, cupcakes):
             else:
                 writer.writerow({"size": cupcake.size, "name": cupcake.name, "flavor": cupcake.flavor, "icing":cupcake.icing, "price": cupcake.price,"filling": None, "sprinkles": cupcake.sprinkles})
 
-write_csv("cupcake.csv", cupcake_list)
+write_csv('cupcake.csv', cupcake_list)
 
 def append_csv(file, new_cupcakes):
     with open(file, "a", newline='\n') as csvfile:
@@ -92,25 +92,9 @@ def append_csv(file, new_cupcakes):
                 writer.writerow({"size": cupcake.size, "name": cupcake.name, "flavor": cupcake.flavor, "icing":cupcake.icing, "price": cupcake.price, "filling": cupcake.filling, "sprinkles": cupcake.sprinkles})
             else:
                 writer.writerow({"size": cupcake.size, "name": cupcake.name, "flavor": cupcake.flavor, "icing":cupcake.icing, "price": cupcake.price,"sprinkles": cupcake.sprinkles})
-append_csv("cupcake.csv", cupcake_list)
 
 my_first_order= [mini_coffee_cupcake]
 
-def add_to_order_csv(file, order):
-    with open(file, "a", newline='\n') as csvfile:
-        fieldnames = ["size","name", "flavor", "icing", "filling", "price", "filling", "sprinkles"]
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        for cupcake in order:
-            
-            if hasattr(order, "filling"):
-                writer.writerow({"size": cupcake.size, "name": cupcake.name, "flavor": cupcake.flavor, "icing":cupcake.icing, "price": cupcake.price, "filling": cupcake.filling, "sprinkles": cupcake.sprinkles})
-            else:
-                writer.writerow({"size": cupcake.size, "name": cupcake.name, "flavor": cupcake.flavor, "icing":cupcake.icing, "price": cupcake.price,"sprinkles": cupcake.sprinkles})
-def find_cupcake(file,name):
-    for cupcake in get_cupcakes(file):
-        if cupcake['name'] == name:
-            return cupcake
 
 def get_cupcakes(file):
     with open(file) as csvfile:
@@ -118,10 +102,21 @@ def get_cupcakes(file):
         reader = list(reader)
         return reader
 
+def find_cupcake(file, names):
+    for cupcake in get_cupcakes(file):
+        print(cupcake)
+        if cupcake["name"] == names:
+            return cupcake
+    return None
+
+def add_to_order_csv(file, cupcake):
+    with open(file, "a", newline='\n') as csvfile:
+        fieldnames = ["size","name", "flavor", "icing", "filling", "price", "filling", "sprinkles"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writerow(cupcake)
 
 
 
-add_to_order_csv('order.csv', my_first_order)
 
 
 

@@ -1,12 +1,20 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, url_for, redirect
 from abc import ABC, abstractmethod
 import csv
 from pprint import pprint
-from cupcakes import get_cupcakes
+from cupcakes import get_cupcakes, add_to_order_csv, find_cupcake
+
 app = Flask(__name__)
 
-
-
+@app.route('/add-cupcakes/<name>')
+def add_cupcake(name):
+    cupcake = find_cupcake("cupcake.csv", name)
+    print(cupcake)
+    if cupcake:
+        add_to_order_csv("orders.csv", cupcake=cupcake)
+        return redirect(url_for('home'))
+    else:
+        return "sorry cupcake doesn't exist"
 
 @app.route('/')
 def home():
