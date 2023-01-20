@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Selections of Cupcakes</title>
+</head>
+<body>
+    <!-- size,name,flavor,icing,filling,price,filling,sprinkles -->
+    <h1> All Cupcake are listed here! </h1>
+    
+    {%for cupcake in cupcakes%}
+        
+    {% if cupcake["filling"] %}
+        <h2><ul>{{cupcake["name"]}}</ul></h2>
+        <h3><li>Flavor:{{cupcake["flavor"]}}</li></h3>
+        <h3><li>Icing:{{cupcake["icing"]}}</li></h3>
+        <h3><li>Price:${{cupcake["price"]}}</li></h3>
+        <h3><li>Filling{{cupcake["filling"]}}</li></h3>
+        {%else%}
+        <h2><ul>{{cupcake["name"]}}</ul></h2>
+        <h3><li>Flavor:{{cupcake["flavor"]}}</li></h3>
+        <h3><li>Icing:{{cupcake["icing"]}}</li></h3>
+        <h3><li>Price:${{cupcake["price"]}}</li></h3>
+        {%endif%}
+        {%endfor%}
+</body>
+</html>
