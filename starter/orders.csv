@@ -1,1 +1,12 @@
-behemoth,Basic B,Vanilla, Chocolate ,,12,,['Multicolored']
+size,name,flavor,icing,price,filling,sprinkles
+mini,Pequeña magdalena de café, Coffee, Vanilla ,5,,['coffee']
+behemoth,Basic B,Vanilla, Chocolate ,12,No Filling options,<cupcakes.Behemoth object at 0x1061a41f0>
+behemoth,Basic B,Vanilla, Chocolate ,12,No Filling options,<cupcakes.Behemoth object at 0x1061a41f0>
+mini,Pequeña magdalena de café, Coffee, Vanilla ,5,,['coffee']
+mini,Pequeña magdalena de café, Coffee, Vanilla ,5,,['coffee']
+mini,Pequeña magdalena de café, Coffee, Vanilla ,5,,['coffee']
+mini,Pequeña magdalena de café, Coffee, Vanilla ,5,,['coffee']
+Regular,Gluten Free,Marble,Vanilla,8,,"['Chocolate', 'Strawberry']"
+mini,Pequeña magdalena de café, Coffee, Vanilla ,5,,['coffee']
+mini,Pequeña magdalena de café, Coffee, Vanilla ,5,,['coffee']
+regular,The Not So Basic B,Marble,Birthday Cake,8,Strawberry ,<cupcakes.Regular object at 0x1061a4220>

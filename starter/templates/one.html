@@ -5,9 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
-    <title>Specialty CupCake</title>
+    <title>Specialty dozen</title>
 </head>
 <body>
-    <h1> Our specialty Cupcake</h1>
+    <h1> Catering orders</h1>
+    {%for cupcake in dozen%}
+        
+    {% if cupcake.filling%}
+    <div>
+    <h2><ul>{{cupcake["name"]}}</ul></h2>
+    <h3><li>Flavor: {{cupcake["flavor"]}}</li></h3>
+    <h3><li>Icing: {{cupcake["icing"]}}</li></h3>
+    <h3><li>Filling {{cupcake["filling"]}}</li></h3>
+    <h3><li>Price: ${{cupcake["price"]}}</li></h3>
+</div>
+        <button>Add to Cart <a href="{{ url_for('add_cater', name = cupcake['name']) }}"> </button>
+
+    {%else%}
+    <div>
+    <h2><ul>{{cupcake["name"]}}</ul></h2>
+    <h3><li>Flavor:{{cupcake["flavor"]}}</li></h3>
+    <h3><li>Icing:{{cupcake["icing"]}}</li></h3>
+    <h3><li>Price:${{cupcake["price"]}}</li></h3>
+</div>
+        <button>Add to Cart <a href="{{ url_for('add_cater', name = cupcake['name']) }}"> </button>
+            
+
+    {%endif%}
+{%endfor%}
+   
 </body>
 </html>

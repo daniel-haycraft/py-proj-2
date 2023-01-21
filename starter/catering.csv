@@ -1,0 +1,4 @@
+size,name,flavor,icing,price,filling,sprinkles
+12inches in diameter,Wedding,Marble,Marble,20,,[]
+Regular,Munchies,Vanilla,Chocolate,20,,['Vanilla']
+Small Cakes,Small Party,Vanilla,Chocolate,35,,[]

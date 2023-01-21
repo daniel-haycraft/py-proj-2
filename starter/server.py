@@ -12,32 +12,34 @@ def add_cupcake(name):
     print(cupcake)
     if cupcake:
         add_to_order_csv("orders.csv", cupcake=cupcake)
-        return redirect(url_for('home'))
+        return redirect(url_for('order'))
     else:
         return "sorry cupcake doesn't exist"
-
-@app.route('/')
-def home():
-    return render_template('index.html')
+@app.route('/add-cater/<name>')
+def add_cater(name):
+    cupcake = find_cupcake("cupcake.csv", name)
+    print(cupcake)
+    if cupcake:
+        add_to_order_csv("orders.csv", cupcake=cupcake)
+        return redirect(url_for('order'))
+    else:
+        return "sorry cupcake doesn't exist"
 @app.route('/one')
 def one():
-    return render_template('one.html')
-@app.route('/all')
+    return render_template('one.html', cupcakes = get_cupcakes('catering.csv'))
+
+@app.route('/')
 def all():
     return render_template('all.html', cupcakes = get_cupcakes('cupcake.csv'))
 @app.route('/orders')
 def order():
-    return render_template('orders.html')
+    return render_template('orders.html', cupcakes =  get_cupcakes('orders.csv'))
 
-
-
-# @app.route('/puppy_latin/<names>')
-# def puppy_lat(names):
-#         if names [-1] == "y":
-#             x = names.replace('y','iful')
-#             return f"<h1>{x.upper()}</h1>"
-#         else:
-#             return f"<h1>{names.upper() + ('Y')}</h1>"
+# @app.route("/guide/<name>", methods=["DELETE"])
+# def guide_delete(name):
+#     slice(name)
+#     return render_template('orders.html', cupcakes =  get_cupcakes('orders.csv'))
+# need to do more research on subject matter i have to go to  work 
 
 
 if __name__ == '__main__':

@@ -31,7 +31,41 @@ class Behemoth(Cupcake):
     size = "behemoth"
 
 class Dozen(Cupcake):
-    size = "12-Regular"
+    size = "Regular"
+    def __init__(self, name, flavor, icing, price):
+        self.name = name
+        self.flavor = flavor
+        self.price = price
+        self.icing = icing
+        self.sprinkles = []
+two_dozen = Dozen('Munchies', 'Vanilla', 'Chocolate', 20)
+class CrazyCakes(Cupcake):
+    size = "Small Cakes"
+    def __init__(self, name, flavor, icing, price):
+        self.name = name
+        self.flavor = flavor
+        self.price = price
+        self.icing = icing
+        self.sprinkles = []
+three_dozen = CrazyCakes('Small Party', 'Vanilla', 'Chocolate', 35)
+
+class Large_Cakes(Cupcake):
+    size =  "12inches in diameter"
+    def __init__(self, name, flavor, icing, price):
+        self.name = name
+        self.flavor = flavor
+        self.price = price
+        self.icing = icing
+        self.sprinkles = []
+    
+dozen =  Large_Cakes('Wedding', 'Marble', 'Marble', 20)
+
+two_dozen.add_sprinkles("Vanilla")
+big_orders = [
+    dozen,
+    two_dozen,
+    three_dozen
+]
 
 class Mini(Cupcake):
     size = "mini"
@@ -44,13 +78,15 @@ class Mini(Cupcake):
 
 mini_coffee_cupcake = Mini("Pequeña magdalena de café", " Coffee", " Vanilla ", 5)
 mini_coffee_cupcake.add_sprinkles("coffee")
-baker_dozen = Dozen("Gluten Free", "Marble", "Vanilla", None, 8)
+baker_dozen = Dozen("Gluten Free", "Marble", "Vanilla", 8)
 baker_dozen.add_sprinkles('Chocolate', 'Strawberry')
 #  name, flavor, icing, filling, price
-behe = Behemoth("Basic B", "Vanilla", " Chocolate ", None, 12)
+behe = Behemoth("Basic B", "Vanilla", " Chocolate ", "No Filling options", 12)
 regular = Regular("The Not So Basic B", "Marble", "Birthday Cake", "Strawberry ", 8)
-regular.add_sprinkles("House Mixture", "hi", "hello")
+regular.add_sprinkles("House Mixture")
 behe.add_sprinkles("Multicolored")
+
+regular.add_sprinkles('Vanilla')
 
 cupcake_list = [
     mini_coffee_cupcake,
@@ -61,34 +97,35 @@ cupcake_list = [
 
 
 def open_read_file(filename):
+    
     with open(filename) as file:
         reader = csv.DictReader(file)
         for words in reader:
-            pprint(words)
+            return words
+
 
 def write_csv(file, cupcakes):
     with open(file, "w", newline='\n') as csvfile:
-        fieldnames = ["size","name", "flavor", "icing", "filling", "price", "filling", "sprinkles"]
+        fieldnames = ["size","name", "flavor", "icing", "price", "filling", "sprinkles"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
         writer.writeheader()
 
         for cupcake in cupcakes:
-            if hasattr(cupcakes, "filling"):
+            if hasattr(cupcake, "filling"):
                 writer.writerow({"size": cupcake.size, "name": cupcake.name, "flavor": cupcake.flavor, "icing":cupcake.icing, "price": cupcake.price, "filling": cupcake.filling, "sprinkles": cupcake})
             else:
-                writer.writerow({"size": cupcake.size, "name": cupcake.name, "flavor": cupcake.flavor, "icing":cupcake.icing, "price": cupcake.price,"filling": None, "sprinkles": cupcake.sprinkles})
+                writer.writerow({"size": cupcake.size, "name": cupcake.name, "flavor": cupcake.flavor, "icing":cupcake.icing, "price": cupcake.price, "sprinkles": cupcake.sprinkles})
 
-write_csv('cupcake.csv', cupcake_list)
 
 def append_csv(file, new_cupcakes):
     with open(file, "a", newline='\n') as csvfile:
-        fieldnames = ["size","name", "flavor", "icing", "filling", "price", "filling", "sprinkles"]
+        fieldnames = ["size","name", "flavor", "icing", "price", "filling", "sprinkles"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
         for cupcake in new_cupcakes:
             
-            if hasattr(new_cupcakes, "filling"):
+            if hasattr(cupcake, "filling"):
                 writer.writerow({"size": cupcake.size, "name": cupcake.name, "flavor": cupcake.flavor, "icing":cupcake.icing, "price": cupcake.price, "filling": cupcake.filling, "sprinkles": cupcake.sprinkles})
             else:
                 writer.writerow({"size": cupcake.size, "name": cupcake.name, "flavor": cupcake.flavor, "icing":cupcake.icing, "price": cupcake.price,"sprinkles": cupcake.sprinkles})
@@ -111,11 +148,21 @@ def find_cupcake(file, names):
 
 def add_to_order_csv(file, cupcake):
     with open(file, "a", newline='\n') as csvfile:
-        fieldnames = ["size","name", "flavor", "icing", "filling", "price", "filling", "sprinkles"]
+        fieldnames = ["size","name", "flavor", "icing", "price", "filling", "sprinkles"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writerow(cupcake)
 
+def read_price(file):
+    x=[]
+    with open(file) as csvfile:
+        reader = csv.DictReader(csvfile)
+        reader = list(reader)
+        for words in reader:
+            x.append(words['price'])
+        return list(map(int,x))
 
+# converted_numbers = read_price('orders.csv')
+# print(converted_numbers)
 
 
 
