@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, url_for, redirect
 from abc import ABC, abstractmethod
 import csv
 from pprint import pprint
-from cupcakes import get_cupcakes, add_to_order_csv, find_cupcake
+from cupcakes import get_cupcakes, add_to_order_csv, find_cupcake, read_price
 
 app = Flask(__name__)
 
@@ -33,7 +33,7 @@ def all():
     return render_template('all.html', cupcakes = get_cupcakes('cupcake.csv'))
 @app.route('/orders')
 def order():
-    return render_template('orders.html', cupcakes =  get_cupcakes('orders.csv'))
+    return render_template('orders.html', cupcakes =  get_cupcakes('orders.csv'), total_price = read_price('orders.csv'))
 
 # @app.route("/guide/<name>", methods=["DELETE"])
 # def guide_delete(name):

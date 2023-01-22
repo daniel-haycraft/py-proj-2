@@ -159,7 +159,9 @@ def read_price(file):
         reader = list(reader)
         for words in reader:
             x.append(words['price'])
-        return list(map(int,x))
+        x = list(map(int,x))
+        return sum(x)
+        
 
 # converted_numbers = read_price('orders.csv')
 # print(converted_numbers)

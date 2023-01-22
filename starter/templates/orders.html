@@ -14,7 +14,8 @@
         <h3><li>Icing:{{cupcake["icing"]}}</li></h3>
         <h3><li>Price:${{cupcake["price"]}}</li></h3>
         <h3><li>Filling:{{cupcake["filling"]}}</li></h3>
-        <button>Buy <a href="{{ url_for('guide_delete', name = cupcake['name']) }}"> </button>
+        <button>Buy </button>
 {%endfor%}
+<h3>The Total Price For Todays Total is {{total_price}}</h3>
 </body>
 </html>
